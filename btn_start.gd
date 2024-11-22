@@ -1,17 +1,20 @@
 extends Sprite2D
 
 #VARIABLES
-var y_loc = 0
-var button_loc
-var max_y_loc
-var range = 10
-var ascending = true
+var current_y_loc
+var object_loc
+var y_origin
+var min_loc
+var ascending : bool = true
+const range = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	button_loc = global_position
-	y_loc = button_loc.y
-	max_y_loc = y_loc
+	#set the initial object location values
+	object_loc = global_position
+	y_origin = object_loc.y
+	current_y_loc = y_origin
+	min_loc = y_origin - range
 	pass # Replace with function body.
 
 
@@ -20,13 +23,13 @@ func _process(delta: float) -> void:
 	_bounce()
 	pass
 
-# _bounce handles the start button moving up/down
 func _bounce():
 	if ascending:
-		y_loc -= .5
-		ascending = max_y_loc - range != y_loc
+		current_y_loc -= .3
+		ascending = min_loc <= current_y_loc
 	else:
-		y_loc += .5
-		ascending = max_y_loc == y_loc
-	button_loc.y = y_loc
-	global_position = button_loc
+		current_y_loc += .3
+		ascending = y_origin <= current_y_loc
+	
+	object_loc.y = current_y_loc
+	global_position = object_loc

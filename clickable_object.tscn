@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ceikr2hhe51q1"]
+
+[ext_resource type="Script" path="res://clickTarget.gd" id="1_tqlo8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hva8c"]
+
+[node name="Clickable Object" type="Area2D"]
+script = ExtResource("1_tqlo8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hva8c")
